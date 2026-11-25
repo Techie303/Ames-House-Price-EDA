@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ames House Prices | Exploratory Analysis</title>
+<meta name="description" content="A plain-English exploratory analysis of house prices in Ames, Iowa, using the Kaggle training dataset.">
+<style>
+:root{--ink:#1c2b36;--muted:#5b6b75;--blue:#315c78;--pale:#edf4f7;--line:#d8e2e8;--orange:#d97831;--white:#fff}
+*{box-sizing:border-box}body{margin:0;background:#f7f9fa;color:var(--ink);font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+header{background:linear-gradient(135deg,#173b53,#397596);color:white;padding:72px 24px 64px}header .wrap,main,.foot{max-width:1080px;margin:auto}.eyebrow{text-transform:uppercase;letter-spacing:.14em;font-size:.78rem;opacity:.85}h1{font-size:clamp(2.3rem,6vw,4rem);line-height:1.08;max-width:760px;margin:.45em 0}header p{font-size:1.15rem;max-width:700px;opacity:.93}.tag{display:inline-block;border:1px solid #ffffff80;border-radius:999px;padding:5px 12px;margin-top:12px;font-size:.9rem}
+main{padding:28px 24px 64px}.intro{font-size:1.1rem;max-width:850px;color:#354a57}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:28px 0}.card{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:21px;box-shadow:0 4px 16px #1c2b3608}.number{font-size:1.9rem;font-weight:700;color:var(--blue);line-height:1.2}.label{color:var(--muted);font-size:.93rem;margin-top:7px}h2{font-size:1.65rem;margin:44px 0 10px}h3{margin:0 0 6px;color:var(--blue)}.dashboard{width:100%;display:block;border:1px solid var(--line);border-radius:12px;background:white;margin:22px 0 12px}.caption{font-size:.9rem;color:var(--muted)}.insights{display:grid;grid-template-columns:1fr 1fr;gap:15px}.insights .card{padding:20px}.links{display:flex;flex-wrap:wrap;gap:12px;margin:22px 0}.button{display:inline-block;background:var(--blue);color:white;text-decoration:none;padding:11px 17px;border-radius:8px;font-weight:600}.button.secondary{background:white;color:var(--blue);border:1px solid var(--blue)}.note{background:var(--pale);border-left:4px solid var(--orange);padding:15px 18px;border-radius:4px;color:#354a57}.small{font-size:.91rem;color:var(--muted)}footer{border-top:1px solid var(--line);padding:22px 24px;color:var(--muted);font-size:.9rem}.foot{max-width:1080px}
+@media(max-width:720px){header{padding:50px 20px}.grid{grid-template-columns:1fr}.insights{grid-template-columns:1fr}main{padding:20px 16px 48px}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><div class="eyebrow">Exploratory data analysis · Ames, Iowa</div><h1>What shapes a house price?</h1><p>A look at 1,460 home sales to see how price relates to home quality, living space, neighborhood, and a few unusual records.</p><span class="tag">Historical sales · 2006–2010</span></div></header>
+<main>
+<p class="intro">The clearest pattern is simple: better overall quality and more living space tend to go with higher sale prices. But prices vary widely, neighborhoods differ, and a handful of unusual homes remind us that a single feature never tells the whole story.</p>
+<div class="grid"><div class="card"><div class="number">$163,000</div><div class="label">Median sale price<br>Average: $180,921</div></div><div class="card"><div class="number">0.79</div><div class="label">Correlation between overall quality and sale price</div></div><div class="card"><div class="number">1,460</div><div class="label">Homes in the dataset<br>81 columns describing each sale</div></div></div>
+<h2>The full picture</h2><p>Each panel adds a different angle: when homes were built, the neighborhoods with the highest average prices, the uneven price distribution, and how living area and quality line up with sale price.</p>
+<img class="dashboard" src="eda_dashboard.png" alt="Four charts: average sale price by year built, top neighborhoods by mean price, sale-price distribution with mean and median, and living area versus sale price colored by quality.">
+<p class="caption">The figures describe this historical sample; they are not a current home valuation.</p>
+<h2>What stands out</h2>
+<div class="insights">
+<div class="card"><h3>Price has a long upper tail</h3><p>The median is about $17,900 below the average, because a small number of expensive homes pull the average upward. A log transform makes the distribution much more balanced.</p></div>
+<div class="card"><h3>Quality and space move with price</h3><p>Overall quality has the strongest numeric correlation with price (0.79), followed by above-ground living area (0.71). Prices generally climb across quality grades.</p></div>
+<div class="card"><h3>Neighborhoods differ</h3><p>The highest neighborhood median is $315,000 in NridgHt, followed by $301,500 in NoRidge and $278,000 in StoneBr. Individual homes can still sit far from those medians.</p></div>
+<div class="card"><h3>Unusual does not mean erroneous</h3><p>Two homes exceed 4,600 square feet but sold below $185,000. They are worth noticing, but the records are not obviously invalid, so they remain in the analysis.</p></div>
+</div>
+<h2>A note about missing values</h2><p>Many blanks mean a home simply had no pool, alley, fence, fireplace, garage, or basement feature. Those are treated as “None.” Garage construction year stays blank where no garage exists; filling in a year would invent information.</p>
+<div class="note"><strong>Keep the context in mind.</strong> These are Ames sales from 2006 to 2010. Correlation does not prove cause, group sizes vary, and the analysis does not adjust for inflation. Use it to understand this dataset, not to estimate what a home is worth today.</div>
+<h2>Explore the work</h2><p>The notebook contains the step-by-step analysis, tables, charts, and code. The CSV is included so the notebook can be rerun.</p>
+<div class="links"><a class="button" href="Ames_House_Price_EDA.ipynb" download>Download the notebook</a><a class="button secondary" href="train.csv" download>Download the dataset</a></div>
+<p class="small">Dataset: Kaggle House Prices: Advanced Regression Techniques, training set. The included CSV is a public mirror of that dataset. This is an exploratory analysis only; no machine-learning model is used.</p>
+</main><footer><div class="foot">Ames House Price EDA · Built from the public Kaggle training data · For learning and exploration</div></footer>
+</body></html>
